@@ -9,9 +9,7 @@ namespace Base.Domain.Repositorios
     public interface ITransferencia
     {
         Task<IEnumerable<Transferencia>> GetAll();
-        Task<IEnumerable<Transferencia>> GetByCategoria(int id);
-        Task<IEnumerable<Transferencia>> GetAllByClienteCatalogo(bool random, int idCategoria = 0, int idUltimoCliente = 0, int quantidade = 0, string pesquisa = "");
-        Task<Transferencia> GetCpfCnpj(string cpfCnpj);     
+        Task<Transferencia> GetById(int id);
         Task<Transferencia> Cadastrar(Transferencia cliente);
         Task<Transferencia> Atualizar(Transferencia cliente);
         Task<Retorno> Excluir(int id);

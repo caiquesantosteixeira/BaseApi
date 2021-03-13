@@ -1,11 +1,12 @@
 ﻿using System;
+using Base.Domain.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Logging;
 
 #nullable disable
 
-namespace BaseApi
+namespace Base.Infra.Context
 {
     public partial class BaseContext : DbContext
     {

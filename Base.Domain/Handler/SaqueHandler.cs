@@ -9,14 +9,14 @@ using Flunt.Notifications;
 using System;
 using System.Threading.Tasks;
 
-namespace Base.Domain.Handler.Cliente
+namespace Base.Domain.Handler
 {
     public class SaqueHandler: Notifiable,
         IHandler<SaqueCadastrarCommand>,
          IHandler<SaqueAtualizarCommand>
     {
-        private readonly ICliente _repository;
-        public SaqueHandler(ICliente repository)
+        private readonly ISaque _repository;
+        public SaqueHandler(ISaque repository)
         {
             _repository = repository;            
 
@@ -38,6 +38,39 @@ namespace Base.Domain.Handler.Cliente
                 return new Retorno(false, "Dados Inválidos!", command.Notifications);
 
            return await Atualizar(command);
+        }
+
+        private async Task<Retorno> Cadastrar(SaqueCadastrarCommand command)
+        {
+            var Saque = new Entidades.Saque();
+            Saque.IdCliente = command.IdCliente;
+
+            try
+            {
+                var ret = await _repository.Cadastrar(Saque);
+                return new Retorno(true, "Cadastrado com sucesso", ret);
+            }
+            catch (Exception)
+            {
+                return new Retorno(false, "Ocorreu um erro ao cadastrar o Saque.", "Ocorreu um erro ao cadastrar o Saque.");
+            }
+        }
+
+        private async Task<Retorno> Atualizar(SaqueAtualizarCommand command)
+        {
+            var Saque = new Entidades.Saque();
+            Saque.Id = command.Id;
+            Saque.IdCliente = command.IdCliente;
+
+            try
+            {
+                var ret = await _repository.Atualizar(Saque);
+                return new Retorno(true, "Ocorreu um erro ao fazer o Saque.", ret);
+            }
+            catch (Exception)
+            {
+                return new Retorno(false, "Ocorreu um erro ao fazer o Saque.", "Ocorreu um erro ao fazer o Saque.");
+            }
         }
     }
 }

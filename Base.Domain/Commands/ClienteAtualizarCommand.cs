@@ -7,6 +7,7 @@ namespace Base.Domain.Commands
 {
     public class ClienteAtualizarCommand: Notifiable, ICommand
     {
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string Cpf { get; set; }
         public decimal Saldo { get; set; }

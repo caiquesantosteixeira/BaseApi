@@ -9,11 +9,10 @@ namespace Base.Domain.Repositorios
     public interface IDeposito
     {
         Task<IEnumerable<Deposito>> GetAll();
-        Task<IEnumerable<Deposito>> GetByCategoria(int id);
-        Task<IEnumerable<Deposito>> GetAllByClienteCatalogo(bool random, int idCategoria = 0, int idUltimoCliente = 0, int quantidade = 0, string pesquisa = "");
-        Task<Cliente> GetCpfCnpj(string cpfCnpj);     
-        Task<Cliente> Cadastrar(Deposito cliente);
-        Task<Cliente> Atualizar(Deposito cliente);
+
+        Task<Deposito> GetById(int id);
+        Task<Deposito> Cadastrar(Deposito cliente);
+        Task<Deposito> Atualizar(Deposito cliente);
         Task<Retorno> Excluir(int id);
     }
 }

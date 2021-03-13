@@ -9,11 +9,10 @@ namespace Base.Domain.Repositorios
     public interface ISaque
     {
         Task<IEnumerable<Saque>> GetAll();
-        Task<IEnumerable<Saque>> GetByCategoria(int id);
-        Task<IEnumerable<Saque>> GetAllByClienteCatalogo(bool random, int idCategoria = 0, int idUltimoCliente = 0, int quantidade = 0, string pesquisa = "");
-        Task<Cliente> GetCpfCnpj(string cpfCnpj);     
-        Task<Cliente> Cadastrar(Saque cliente);
-        Task<Cliente> Atualizar(Saque cliente);
+
+        Task<Saque> GetById(int id);
+        Task<Saque> Cadastrar(Saque saque);
+        Task<Saque> Atualizar(Saque saque);
         Task<Retorno> Excluir(int id);
     }
 }
