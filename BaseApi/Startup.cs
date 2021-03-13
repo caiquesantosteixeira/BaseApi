@@ -1,14 +1,20 @@
+using Base.API.Configuracoes;
+using Base.Infra.Helpers.Configuracoes;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace BaseApi
@@ -26,6 +32,37 @@ namespace BaseApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            string conexao = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<BaseContext>(a => a.UseSqlServer(conexao));
+
+            // configuração do Identity
+            //services.AddIdentityConfig(Configuration, tipoBanco);
+
+            // Injeção de dependencias
+            services.AddDependenciasConfig();
+
+            // Adiciona as instancias de alguns serviços
+            services.AddIntanciaServiceConfig();
+
+            //Rodas as Migraçoes do Identity
+            //InicializaDatabase.ExecutaIdentityMigrations();
+
+            // Roda os Migrations
+            //MigrationsDataBase.RunMigration(conexao, tipoBanco);
+
+            services.AddCors(o => o.AddPolicy("EnableCors", builder => {
+                builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+            }));
+
+            //Swagger
+            services.ConfiguraSwagger($"{Assembly.GetExecutingAssembly().GetName().Version}");
+
+            services.AddMvc();
+            services.AddControllers()
+                    .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,10 +72,33 @@ namespace BaseApi
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStaticFiles();
 
-            app.UseHttpsRedirection();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.RoutePrefix = "documentacao";
+                c.SwaggerEndpoint("../swagger/v1/swagger.json", "Projeto Base");
+            });
+
+            var option = new RewriteOptions();
+            option.AddRedirect("^$", "index.html");
+            app.UseRewriter(option);
+
+            ////Rodas as Migraçoes do Identity
+            //InicializaDatabase.InicializarBanco(app.ApplicationServices);
+
+            var cultureInfo = new CultureInfo("pt-BR");
+            cultureInfo.NumberFormat.CurrencySymbol = "R$";
+
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("EnableCors");
 
             app.UseAuthorization();
 
