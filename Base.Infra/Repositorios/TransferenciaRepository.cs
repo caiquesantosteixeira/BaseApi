@@ -3,6 +3,7 @@ using Base.Domain.Repositorios;
 using Base.Domain.Retornos;
 using Base.Domain.ValueObject.Basicos;
 using Base.Infra.Context;
+using Base.Infra.Context.BaseContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

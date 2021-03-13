@@ -1,4 +1,5 @@
 ﻿using Base.Infra.Context;
+using Base.Infra.Context.BaseContext;
 using Base.Infra.Helpers;
 using BaseApi;
 using Microsoft.AspNetCore.Http;

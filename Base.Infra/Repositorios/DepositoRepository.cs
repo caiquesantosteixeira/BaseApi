@@ -3,6 +3,7 @@ using Base.Domain.Repositorios;
 using Base.Domain.Retornos;
 using Base.Domain.ValueObject.Basicos;
 using Base.Infra.Context;
+using Base.Infra.Context.BaseContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                _ctx.Depositos.Add(deposito);
+                _ctx.Deposito.Add(deposito);
                 await _ctx.SaveChangesAsync();
                 return deposito;
             }
@@ -43,7 +44,7 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                _ctx.Depositos.Update(deposito);
+                _ctx.Deposito.Update(deposito);
                 await _ctx.SaveChangesAsync();
                 return deposito;
             }
@@ -58,7 +59,7 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                return await _ctx.Depositos.AsNoTracking().ToListAsync();
+                return await _ctx.Deposito.AsNoTracking().ToListAsync();
             }
             catch (Exception ex)
             {
@@ -71,7 +72,7 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                return await _ctx.Depositos.AsNoTracking().Include(x => x.Id).FirstOrDefaultAsync(x => x.Id == id);
+                return await _ctx.Deposito.AsNoTracking().Include(x => x.Id).FirstOrDefaultAsync(x => x.Id == id);
             }
             catch (Exception ex)
             {
@@ -86,11 +87,11 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                var reg = await _ctx.Depositos.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+                var reg = await _ctx.Deposito.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
                 if (reg == null)
                     return new Retorno(false, "Registro não encontrado", "Registro não encontrado");
 
-                _ctx.Depositos.Remove(reg);
+                _ctx.Deposito.Remove(reg);
                 await _ctx.SaveChangesAsync();
 
                 //_imgRepository.ExcluirImagemClientes(_cnpj,_nomeimagem);

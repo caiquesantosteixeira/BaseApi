@@ -3,6 +3,7 @@ using Base.Domain.Repositorios;
 using Base.Domain.Retornos;
 using Base.Domain.ValueObject.Basicos;
 using Base.Infra.Context;
+using Base.Infra.Context.BaseContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                _ctx.Saques.Add(saque);
+                _ctx.Saque.Add(saque);
                 await _ctx.SaveChangesAsync();
                 return saque;
             }
@@ -45,7 +46,7 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                _ctx.Saques.Update(saque);
+                _ctx.Saque.Update(saque);
                 await _ctx.SaveChangesAsync();
                 return saque;
             }
@@ -61,7 +62,7 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                return await _ctx.Saques.AsNoTracking().ToListAsync();
+                return await _ctx.Saque.AsNoTracking().ToListAsync();
             }
             catch (Exception ex)
             {
@@ -74,7 +75,7 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                return await _ctx.Saques.AsNoTracking().Include(x => x.Id).FirstOrDefaultAsync(x => x.Id == id);
+                return await _ctx.Saque.AsNoTracking().Include(x => x.Id).FirstOrDefaultAsync(x => x.Id == id);
             }
             catch (Exception ex)
             {
@@ -87,7 +88,7 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                var reg = await _ctx.Saques.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+                var reg = await _ctx.Saque.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
                 if (reg == null)
                     return new Retorno(false, "Registro não encontrado", "Registro não encontrado");
 
@@ -95,7 +96,7 @@ namespace Base.Infra.Repositorios
                 //string _nomeimagem = reg.Imagem;
                 //string _cnpj = reg.CpfCnpj;
 
-                _ctx.Saques.Remove(reg);
+                _ctx.Saque.Remove(reg);
                 await _ctx.SaveChangesAsync();
 
                 //_imgRepository.ExcluirImagemClientes(_cnpj,_nomeimagem);

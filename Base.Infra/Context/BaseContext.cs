@@ -2,16 +2,11 @@
 using Base.Domain.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Logging;
 
-#nullable disable
-
-namespace Base.Infra.Context
+namespace Base.Infra.Context.BaseContext
 {
     public partial class BaseContext : DbContext
     {
-        public static readonly ILoggerFactory MyLoggerFactory
-                   = LoggerFactory.Create(builder => { builder.AddConsole(); });
         public BaseContext()
         {
         }
@@ -21,22 +16,22 @@ namespace Base.Infra.Context
         {
         }
 
-        public virtual DbSet<Cliente> Clientes { get; set; }
-        public virtual DbSet<Deposito> Depositos { get; set; }
-        public virtual DbSet<Saque> Saques { get; set; }
+        public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<Deposito> Deposito { get; set; }
+        public virtual DbSet<Saque> Saque { get; set; }
         public virtual DbSet<Transferencia> Transferencia { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseLoggerFactory(MyLoggerFactory);
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-OKMI7T9;Initial Catalog=base;User Id=sa;Password=8246kaka!;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
+            modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
             modelBuilder.Entity<Cliente>(entity =>
             {
@@ -46,19 +41,19 @@ namespace Base.Infra.Context
 
                 entity.Property(e => e.Cpf)
                     .IsRequired()
+                    .HasColumnName("cpf")
                     .HasMaxLength(11)
-                    .IsUnicode(false)
-                    .HasColumnName("cpf");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Nome)
                     .IsRequired()
+                    .HasColumnName("nome")
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("nome");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Saldo)
-                    .HasColumnType("decimal(10, 2)")
-                    .HasColumnName("saldo");
+                    .HasColumnName("saldo")
+                    .HasColumnType("decimal(10, 2)");
             });
 
             modelBuilder.Entity<Deposito>(entity =>
@@ -69,13 +64,18 @@ namespace Base.Infra.Context
 
                 entity.Property(e => e.IdCliente).HasColumnName("idCliente");
 
+                entity.Property(e => e.Valor)
+                    .HasColumnName("valor")
+                    .HasColumnType("decimal(10, 2)");
                 entity.Property(e => e.NomeRemetente)
+                    .HasColumnName("nomeRemetente")
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("nomeRemetente");
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Data).HasColumnName("Data");
 
                 entity.HasOne(d => d.IdClienteNavigation)
-                    .WithMany(p => p.Depositos)
+                    .WithMany(p => p.Deposito)
                     .HasForeignKey(d => d.IdCliente)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__deposito__nomeRe__34C8D9D1");
@@ -89,8 +89,14 @@ namespace Base.Infra.Context
 
                 entity.Property(e => e.IdCliente).HasColumnName("idCliente");
 
+                entity.Property(e => e.Valor)
+                        .HasColumnName("valor")
+                        .HasColumnType("decimal(10, 2)");
+
+                entity.Property(e => e.Data).HasColumnName("Data");
+
                 entity.HasOne(d => d.IdClienteNavigation)
-                    .WithMany(p => p.Saques)
+                    .WithMany(p => p.Saque)
                     .HasForeignKey(d => d.IdCliente)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__saque__idCliente__31EC6D26");
@@ -107,25 +113,23 @@ namespace Base.Infra.Context
                 entity.Property(e => e.IdClienteRemetente).HasColumnName("idClienteRemetente");
 
                 entity.Property(e => e.Valor)
-                    .HasColumnType("decimal(10, 2)")
-                    .HasColumnName("valor");
+                    .HasColumnName("valor")
+                    .HasColumnType("decimal(10, 2)");
+
+                entity.Property(e => e.Data).HasColumnName("Data");
 
                 entity.HasOne(d => d.IdClienteDestinatarioNavigation)
-                    .WithMany(p => p.TransferenciumIdClienteDestinatarioNavigations)
+                    .WithMany(p => p.TransferenciaIdClienteDestinatarioNavigation)
                     .HasForeignKey(d => d.IdClienteDestinatario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__transfere__idCli__38996AB5");
+                    .HasConstraintName("FK__transfere__idCli__3C69FB99");
 
                 entity.HasOne(d => d.IdClienteRemetenteNavigation)
-                    .WithMany(p => p.TransferenciumIdClienteRemetenteNavigations)
+                    .WithMany(p => p.TransferenciaIdClienteRemetenteNavigation)
                     .HasForeignKey(d => d.IdClienteRemetente)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__transfere__idCli__37A5467C");
+                    .HasConstraintName("FK__transfere__idCli__3B75D760");
             });
-
-            OnModelCreatingPartial(modelBuilder);
         }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

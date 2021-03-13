@@ -3,13 +3,13 @@ using Base.Domain.Repositorios;
 using Base.Domain.Retornos;
 using Base.Domain.ValueObject.Basicos;
 using Base.Infra.Context;
+using Base.Infra.Context.BaseContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-
 
 namespace Base.Infra.Repositorios
 {
@@ -29,7 +29,7 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                _ctx.Clientes.Add(cliente);
+                _ctx.Cliente.Add(cliente);
                 await _ctx.SaveChangesAsync();
                 return cliente;
             }
@@ -44,7 +44,7 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                _ctx.Clientes.Update(cliente);
+                _ctx.Cliente.Update(cliente);
                 await _ctx.SaveChangesAsync();
                 return cliente;
             }
@@ -59,7 +59,7 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                return await _ctx.Clientes.AsNoTracking().ToListAsync();
+                return await _ctx.Cliente.ToListAsync();
             }
             catch (Exception ex)
             {
@@ -72,7 +72,7 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                return await _ctx.Clientes.AsNoTracking().Include(x => x.Id).FirstOrDefaultAsync(x => x.Id == id);
+                return await _ctx.Cliente.AsNoTracking().Include(x => x.Id).FirstOrDefaultAsync(x => x.Id == id);
             }
             catch (Exception ex)
             {
@@ -86,7 +86,7 @@ namespace Base.Infra.Repositorios
             try
             {
                 //var doc = cpfCnpj.SomenteNumeros();
-                return await _ctx.Clientes.AsNoTracking().FirstOrDefaultAsync(x => x.Cpf == cpfCnpj);
+                return await _ctx.Cliente.AsNoTracking().FirstOrDefaultAsync(x => x.Cpf == cpfCnpj);
             }
             catch (Exception ex)
             {
@@ -99,7 +99,7 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                var reg = await _ctx.Clientes.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+                var reg = await _ctx.Cliente.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
                 if (reg == null)
                     return new Retorno(false, "Registro não encontrado", "Registro não encontrado");
 
@@ -107,7 +107,7 @@ namespace Base.Infra.Repositorios
                 //string _nomeimagem = reg.Imagem;
                 //string _cnpj = reg.CpfCnpj;
 
-                _ctx.Clientes.Remove(reg);
+                _ctx.Cliente.Remove(reg);
                 await _ctx.SaveChangesAsync();
 
                 //_imgRepository.ExcluirImagemClientes(_cnpj,_nomeimagem);

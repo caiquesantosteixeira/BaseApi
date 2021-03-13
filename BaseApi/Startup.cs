@@ -1,5 +1,6 @@
 using Base.API.Configuracoes;
 using Base.Infra.Context;
+using Base.Infra.Context.BaseContext;
 using Base.Infra.Helpers.Configuracoes;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
