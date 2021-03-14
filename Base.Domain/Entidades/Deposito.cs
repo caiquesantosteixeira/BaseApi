@@ -9,7 +9,8 @@ namespace Base.Domain.Entidades
         public int IdCliente { get; set; }
         public string NomeRemetente { get; set; }
         public decimal Valor { get; set; }
-        public DateTime Data { get; set; }
+        public DateTime? Data { get; set; }
+
         public virtual Cliente IdClienteNavigation { get; set; }
     }
 }

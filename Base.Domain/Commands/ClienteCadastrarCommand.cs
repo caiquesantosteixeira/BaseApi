@@ -12,6 +12,7 @@ namespace Base.Domain.Commands
         public string Cpf { get; set; }
         public decimal Saldo { get; set; }
 
+        public string Senha { get; set; }
         public void Validate()
         {
            // AddNotifications(

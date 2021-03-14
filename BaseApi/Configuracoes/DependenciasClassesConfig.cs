@@ -1,7 +1,9 @@
 ﻿using Base.Domain.Handler;
 using Base.Domain.Repositorios;
+using Base.Domain.Repositorios.Usuarios;
 using Base.Domain.Services;
 using Base.Infra.Repositorios;
+using Base.Infra.Repositorios.Usuarios;
 using Base.Infra.Services;
 using Base.Infra.Services.Cliente;
 using Microsoft.AspNetCore.Http;
@@ -14,7 +16,7 @@ namespace Base.API.Configuracoes
         public static IServiceCollection AddDependenciasConfig(this IServiceCollection services)
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            //services.AddScoped<IUserIdentity, UserIdentity>();
+            services.AddScoped<IUserIdentity, UserIdentity>();
 
             //Repositórios
             services.AddTransient<ICliente, ClienteRepository>();

@@ -52,7 +52,7 @@ namespace Base.Domain.Handler
             cliente.Nome = command.Nome;
             cliente.Saldo = command.Saldo;
             cliente.Cpf = command.Cpf;
-
+            cliente.Senha = command.Senha;
             try
             {
                 var ret = await _repository.Cadastrar(cliente);
@@ -77,7 +77,7 @@ namespace Base.Domain.Handler
             cliente.Nome = command.Nome;
             cliente.Saldo = command.Saldo;
             cliente.Cpf = command.Cpf;
-
+            //cliente.Senha = command.Senha;
             try
             {
                 var ret = await _repository.Atualizar(cliente);

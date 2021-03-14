@@ -1,5 +1,6 @@
 ﻿using System;
 using Base.Domain.Entidades;
+using Base.Domain.Shared.Entidades.Usuarios;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -20,6 +21,8 @@ namespace Base.Infra.Context.BaseContext
         public virtual DbSet<Deposito> Deposito { get; set; }
         public virtual DbSet<Saque> Saque { get; set; }
         public virtual DbSet<Transferencia> Transferencia { get; set; }
+
+        public virtual DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -129,6 +132,15 @@ namespace Base.Infra.Context.BaseContext
                     .HasForeignKey(d => d.IdClienteRemetente)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__transfere__idCli__3B75D760");
+            });
+
+            modelBuilder.Entity<Usuario>(entity =>
+            {
+                entity.ToTable("usuarios");
+                //entity.Property(e => e.IdPerfil).HasColumnName("idperfil");
+                //entity.Property(e => e.Ativo).HasColumnName("ativo").HasDefaultValue(false);
+                //entity.Property(x => x.Administrador).HasColumnName("administrador").HasDefaultValue(false);
+                //entity.Property(e => e.Nome).HasColumnName("nome");               
             });
         }
     }

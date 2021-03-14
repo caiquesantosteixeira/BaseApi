@@ -2,6 +2,7 @@ using Base.API.Configuracoes;
 using Base.Infra.Context;
 using Base.Infra.Context.BaseContext;
 using Base.Infra.Helpers.Configuracoes;
+using Base.Infra.Migrations.Configs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Rewrite;
@@ -32,7 +33,7 @@ namespace BaseApi
             services.AddDbContext<BaseContext>(a => a.UseSqlServer(conexao));
 
             // configuração do Identity
-            //services.AddIdentityConfig(Configuration, tipoBanco);
+            services.AddIdentityConfig(Configuration);
 
             // Injeção de dependencias
             services.AddDependenciasConfig();
@@ -41,10 +42,10 @@ namespace BaseApi
             services.AddIntanciaServiceConfig();
 
             //Rodas as Migraçoes do Identity
-            //InicializaDatabase.ExecutaIdentityMigrations();
+            InicializaDatabase.ExecutaIdentityMigrations();
 
             // Roda os Migrations
-            //MigrationsDataBase.RunMigration(conexao, tipoBanco);
+            //MigrationsDataBase.RunMigration(conexao);
 
             services.AddCors(o => o.AddPolicy("EnableCors", builder => {
                 builder.AllowAnyOrigin()
@@ -95,7 +96,8 @@ namespace BaseApi
 
             app.UseCors("EnableCors");
 
-            //app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

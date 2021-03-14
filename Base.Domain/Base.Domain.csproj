@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!--<ProjectReference Include="..\Base.Domain.Shared\Base.Domain.Shared.csproj" />-->
+    <ProjectReference Include="..\Base.Domain.Shared\Base.Domain.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

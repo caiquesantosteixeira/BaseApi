@@ -19,8 +19,8 @@ namespace Base.API.Configuracoes
             //var serv2 = serviceProvider.GetService<ILog>();
             //LocalizarService.Registrar<ILog>("ILog", serv2);
 
-            //var serv3 = serviceProvider.GetService<IdentityDataContext>();
-            //LocalizarService.Registrar<IdentityDataContext>("IdentityDataContext", serv3);           
+            var serv3 = serviceProvider.GetService<IdentityDataContext>();
+            LocalizarService.Registrar<IdentityDataContext>("IdentityDataContext", serv3);
 
             return services;
         }

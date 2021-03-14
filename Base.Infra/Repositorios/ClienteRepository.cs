@@ -1,9 +1,12 @@
 ﻿
 using Base.Domain.Repositorios;
 using Base.Domain.Retornos;
+using Base.Domain.Shared.Entidades.Usuarios;
 using Base.Domain.ValueObject.Basicos;
 using Base.Infra.Context;
 using Base.Infra.Context.BaseContext;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,6 +18,8 @@ namespace Base.Infra.Repositorios
 {
     public class ClienteRepository: ICliente
     {
+        private readonly SignInManager<Usuario> _signInManager;
+        private readonly UserManager<Usuario> _userManager;
         public readonly BaseContext _ctx;
         //private readonly ILog _log;
         //private readonly IImagens _imgRepository;
@@ -29,6 +34,23 @@ namespace Base.Infra.Repositorios
         {
             try
             {
+                IUserStore<Usuario> _store = new UserStore<Usuario>(new BaseContext());
+                UserManager<Usuario> _userManager = new UserManager<Usuario>(_store, null, new PasswordHasher<Usuario>(), null, null, null, null, null, null);
+
+
+                var user = new Usuario
+                {
+                    UserName = cliente.Cpf,
+                    Email = "",
+                    EmailConfirmed = true,
+                    NormalizedEmail = "",
+                    SecurityStamp = "5X5F7RIXE5DHAIWEM4MCGM7QRFQOK67C",
+                    ConcurrencyStamp = "6625979f-d1c1-46fb-aa54-4e094badd8bd"
+                };
+
+                var result = await _userManager.CreateAsync(user, cliente.Senha);
+
+                cliente.IdUsuario = user.Id;
                 _ctx.Cliente.Add(cliente);
                 await _ctx.SaveChangesAsync();
                 return cliente;
