@@ -47,7 +47,7 @@ namespace Base.Domain.Handler
             Transferencia.IdClienteRemetente = command.IdClienteRemetente;
             Transferencia.IdClienteDestinatario = command.IdClienteDestinatario;
             Transferencia.Valor = command.Valor;
-
+            Transferencia.Data = DateTime.Now;
             try
             {
                 var ret = await _repository.Cadastrar(Transferencia);
@@ -66,6 +66,7 @@ namespace Base.Domain.Handler
             Transferencia.IdClienteRemetente = command.IdClienteRemetente;
             Transferencia.IdClienteDestinatario = command.IdClienteDestinatario;
             Transferencia.Valor = command.Valor;
+            Transferencia.Data = DateTime.Now;
 
             try
             {

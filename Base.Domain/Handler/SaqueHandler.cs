@@ -44,7 +44,8 @@ namespace Base.Domain.Handler
         {
             var Saque = new Entidades.Saque();
             Saque.IdCliente = command.IdCliente;
-
+            Saque.Valor = command.Valor;
+            Saque.Data = DateTime.Now;
             try
             {
                 var ret = await _repository.Cadastrar(Saque);
@@ -61,7 +62,8 @@ namespace Base.Domain.Handler
             var Saque = new Entidades.Saque();
             Saque.Id = command.Id;
             Saque.IdCliente = command.IdCliente;
-
+            Saque.Valor = command.Valor;
+            Saque.Data = DateTime.Now;
             try
             {
                 var ret = await _repository.Atualizar(Saque);

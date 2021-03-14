@@ -1,6 +1,7 @@
 ﻿using Base.Domain.Commands.Interfaces;
 using Flunt.Notifications;
 using Flunt.Validations;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Base.Domain.Commands.Cliente
@@ -11,7 +12,8 @@ namespace Base.Domain.Commands.Cliente
         public int IdCliente { get; set; }
         public string NomeRemetente { get; set; }
 
-
+        public decimal Valor { get; set; }
+        public DateTime Data { get; set; }
         public void Validate()
         {
            // AddNotifications(

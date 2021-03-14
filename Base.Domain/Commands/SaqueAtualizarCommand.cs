@@ -10,6 +10,7 @@ namespace Base.Domain.Commands.Cliente
         public int Id { get; set; }
         public int IdCliente { get; set; }
 
+        public decimal Valor { get; set; }
         public void Validate()
         {
             AddNotifications(

@@ -45,6 +45,8 @@ namespace Base.Domain.Handler
             var Deposito = new Entidades.Deposito();
             Deposito.IdCliente = command.IdCliente;
             Deposito.NomeRemetente = command.NomeRemetente??"";
+            Deposito.Valor  = command.Valor;
+            Deposito.Data = DateTime.Now;
 
             try
             {
@@ -63,6 +65,8 @@ namespace Base.Domain.Handler
             Deposito.Id = command.Id;
             Deposito.IdCliente = command.IdCliente;
             Deposito.NomeRemetente = command.NomeRemetente ?? "";
+            Deposito.Valor = command.Valor;
+            Deposito.Data = DateTime.Now;
 
             try
             {
