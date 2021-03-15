@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Domain", "Base.Domain\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Domain.Shared", "Base.Domain.Shared\Base.Domain.Shared.csproj", "{1002B071-FF90-4E9B-8934-DA3B21635AA9}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentMigrator.SqlServer", "FluentMigrator.SqlServer\FluentMigrator.SqlServer.csproj", "{ABDAFC91-2270-4C29-BB08-DC9F344996C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{1002B071-FF90-4E9B-8934-DA3B21635AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1002B071-FF90-4E9B-8934-DA3B21635AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1002B071-FF90-4E9B-8934-DA3B21635AA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABDAFC91-2270-4C29-BB08-DC9F344996C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABDAFC91-2270-4C29-BB08-DC9F344996C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABDAFC91-2270-4C29-BB08-DC9F344996C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABDAFC91-2270-4C29-BB08-DC9F344996C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

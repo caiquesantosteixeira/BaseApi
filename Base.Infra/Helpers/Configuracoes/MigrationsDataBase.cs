@@ -1,4 +1,4 @@
-﻿//using Base.Infra.Migrations.Enum;
+﻿using FluentMigrator.SqlServer; 
 using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
 using System;

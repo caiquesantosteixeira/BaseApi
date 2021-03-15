@@ -32,6 +32,8 @@ namespace BaseApi
             string conexao = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<BaseContext>(a => a.UseSqlServer(conexao));
 
+            // Checa se o Banco existe/Cria antes de executar as Migrations           
+            CheckDatabase.DatabaseExist(conexao);
             // configuração do Identity
             services.AddIdentityConfig(Configuration);
 
@@ -46,7 +48,7 @@ namespace BaseApi
 
             // Roda os Migrations
             //MigrationsDataBase.RunMigration(conexao);
-
+            CheckDatabase.CreateTablesSqlServer(conexao);
             services.AddCors(o => o.AddPolicy("EnableCors", builder => {
                 builder.AllowAnyOrigin()
                         .AllowAnyMethod()

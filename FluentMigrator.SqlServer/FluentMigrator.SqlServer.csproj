@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Migrations\_scripts\Tabelas_catalogo.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentMigrator" Version="3.2.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\_scripts\" />
+  </ItemGroup>
+
+</Project>

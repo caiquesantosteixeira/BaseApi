@@ -32,6 +32,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Base.Domain.Shared\Base.Domain.Shared.csproj" />
     <ProjectReference Include="..\Base.Domain\Base.Domain.csproj" />
+    <ProjectReference Include="..\FluentMigrator.SqlServer\FluentMigrator.SqlServer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
