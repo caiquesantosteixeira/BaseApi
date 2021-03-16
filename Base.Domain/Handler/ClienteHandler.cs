@@ -66,17 +66,14 @@ namespace Base.Domain.Handler
 
         private async Task<Retorno> Atualizar(ClienteAtualizarCommand command)
         {
-            var cliente = await _repository.GetCpfCnpj(command.Cpf);
-            if (cliente != null)
-                return new Retorno(false, "Cliente já existe", "Cliente já existe");
+            var clienteBase = await _repository.GetCpfCnpj(command.Cpf);
 
-
-
-            cliente = new Entidades.Cliente();
+            var cliente = new Entidades.Cliente();
             cliente.Id = command.Id;
             cliente.Nome = command.Nome;
             cliente.Saldo = command.Saldo;
             cliente.Cpf = command.Cpf;
+            cliente.IdUsuario = clienteBase.IdUsuario;
             //cliente.Senha = command.Senha;
             try
             {

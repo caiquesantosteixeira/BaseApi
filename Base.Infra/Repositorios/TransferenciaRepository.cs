@@ -30,20 +30,6 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                var clienteRemetente = _ctx.Cliente.FirstOrDefault(a => a.Id == transferencia.IdClienteRemetente);
-                clienteRemetente.Saldo -= transferencia.Valor;
-
-
-                _ctx.Cliente.Update(clienteRemetente);
-                await _ctx.SaveChangesAsync();
-
-                var clienteDestinatário = _ctx.Cliente.FirstOrDefault(a => a.Id == transferencia.IdClienteRemetente);
-                clienteDestinatário.Saldo += transferencia.Valor;
-
-                _ctx.Cliente.Update(clienteDestinatário);
-                await _ctx.SaveChangesAsync();
-
-
                 _ctx.Transferencia.Add(transferencia);
                 await _ctx.SaveChangesAsync();
                 return transferencia;

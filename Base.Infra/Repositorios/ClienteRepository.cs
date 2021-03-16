@@ -34,8 +34,8 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                IUserStore<Usuario> _store = new UserStore<Usuario>(new BaseContext());
-                UserManager<Usuario> _userManager = new UserManager<Usuario>(_store, null, new PasswordHasher<Usuario>(), null, null, null, null, null, null);
+                //IUserStore<Usuario> _store = new UserStore<Usuario>(new BaseContext());
+                //UserManager<Usuario> _userManager = new UserManager<Usuario>(_store, null, new PasswordHasher<Usuario>(), null, null, null, null, null, null);
 
 
                 var user = new Usuario

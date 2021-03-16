@@ -31,12 +31,6 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                var cliente = _ctx.Cliente.FirstOrDefault(a => a.Id == saque.IdCliente);
-                cliente.Saldo -= saque.Valor;
-
-                _ctx.Cliente.Update(cliente);
-                await _ctx.SaveChangesAsync();
-
                 _ctx.Saque.Add(saque);
                 await _ctx.SaveChangesAsync();
                 return saque;

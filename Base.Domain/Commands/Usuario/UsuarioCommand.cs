@@ -13,14 +13,7 @@ namespace Base.Domain.Commands.Usuario
         public string UserName { get; set; }
         [Required]
         public string Senha { get; set; }
-        [Required]
         public string Email { get; set; }
-        [Required]
-        public bool Ativo { get; set; }
-        [Required]
-        public int IdPerfil { get; set; }
-        [Required]
-        public string Nome { get; set; }
 
         public UsuarioCommand()
         {
@@ -33,9 +26,7 @@ namespace Base.Domain.Commands.Usuario
              new Contract()
                .Requires()
                .HasMinLen(UserName, 3, "UserName", "Preencha o Usuario com no mínimo 3 caracteres.")
-               .IsEmail(Email, "Email", "Email Inválido")
-               .IsGreaterThan(IdPerfil,0, "IdPerfil","Selecione o Perfil do Usuário.")
-               .HasMinLen(Nome,3, "Nome", "Preencha o Nome com no mínimo 3 caracteres.")               
+           
            );
         }
 

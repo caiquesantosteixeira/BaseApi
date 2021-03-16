@@ -60,7 +60,6 @@ namespace Base.API.Controllers.v1
             }
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] UsuarioCommand command, [FromServices] UsuarioHandler handler)
         {

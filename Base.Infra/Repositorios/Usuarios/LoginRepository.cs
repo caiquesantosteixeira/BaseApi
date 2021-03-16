@@ -96,10 +96,6 @@ namespace Base.Infra.Repositorios.Usuarios
                 if(usuExist != null)
                     return new Retorno (false, "Usuario já existe", "Usuario já existe");
 
-                usuExist = await GetUsuarioByEmail(command.Email);
-                if (usuExist != null)
-                    return new Retorno (false, "Email já existe", "Email já existe");
-
                 var user = new Usuario
                 {
                     UserName = command.UserName,

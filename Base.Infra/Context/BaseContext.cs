@@ -42,6 +42,8 @@ namespace Base.Infra.Context.BaseContext
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.IdUsuario).HasColumnName("idusuario");
+
                 entity.Property(e => e.Cpf)
                     .IsRequired()
                     .HasColumnName("cpf")

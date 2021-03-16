@@ -1,4 +1,5 @@
 ﻿using Base.Domain.Handler;
+using Base.Domain.Handler.Usuario;
 using Base.Domain.Repositorios;
 using Base.Domain.Repositorios.Usuarios;
 using Base.Domain.Services;
@@ -30,6 +31,7 @@ namespace Base.API.Configuracoes
             services.AddTransient<SaqueHandler, SaqueHandler>();
             services.AddTransient<TransferenciaHandler, TransferenciaHandler>();
             services.AddTransient<DepositoHandler, DepositoHandler>();
+            services.AddTransient<UsuarioHandler, UsuarioHandler>();
 
             //Services
             services.AddScoped<IClientesService, ClientesService>();
