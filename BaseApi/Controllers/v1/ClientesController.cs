@@ -13,6 +13,7 @@ namespace Base.API.Controllers.v1
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+
     [Produces("application/json")]
     public class ClientesController : ControllerBase
     {
@@ -20,6 +21,7 @@ namespace Base.API.Controllers.v1
 
 
         [HttpGet()]
+        [Authorize]
         public async Task<IActionResult> GetAll([FromServices] IClientesService service)
         {
             try
@@ -37,6 +39,7 @@ namespace Base.API.Controllers.v1
 
 
         [HttpGet("{id:int}")]
+        [Authorize]
         public async Task<IActionResult> GetById(int id, [FromServices] IClientesService service)
         {
             try
@@ -58,6 +61,7 @@ namespace Base.API.Controllers.v1
         /// <param name="service"></param>
         /// <returns></returns>
         [HttpGet("CpfCnpj/{CpfCnpj}")]
+        [Authorize]
         public async Task<IActionResult> GetByCpfCnpj(string CpfCnpj, [FromServices] IClientesService service)
         {
             try
@@ -95,6 +99,7 @@ namespace Base.API.Controllers.v1
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> Put([FromBody] ClienteAtualizarCommand menuCommand, [FromServices] ClienteHandler handler)
         {
             try
@@ -117,6 +122,7 @@ namespace Base.API.Controllers.v1
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> Delete(int id, [FromServices] ICliente repository)
         {
             try

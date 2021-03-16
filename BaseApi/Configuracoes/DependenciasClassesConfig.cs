@@ -23,7 +23,7 @@ namespace Base.API.Configuracoes
             services.AddTransient<ISaque, SaqueRepository>();
             services.AddTransient<ITransferencia, TransferenciaRepository>();
             services.AddTransient<IDeposito, DepositoRepository>();
-
+            services.AddTransient<IUsuario, LoginRepository>();
 
             //Handler
             services.AddTransient<ClienteHandler, ClienteHandler>();

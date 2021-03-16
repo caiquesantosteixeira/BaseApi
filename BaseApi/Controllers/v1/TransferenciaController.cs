@@ -13,6 +13,7 @@ namespace Base.API.Controllers.v1
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize]
     [Produces("application/json")]
     public class TransferenciaController : ControllerBase
     {
