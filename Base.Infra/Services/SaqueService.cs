@@ -23,11 +23,11 @@ namespace Base.Infra.Services.Cliente
 
 
 
-        public async Task<IEnumerable<Base.Domain.Entidades.Saque>> GetAll()
+        public async Task<IEnumerable<Base.Domain.Entidades.Saque>> GetAll(int idCliente)
         {
             try
             {
-                var entidades = await _saqueRepo.GetAll();
+                var entidades = await _saqueRepo.GetAll(idCliente);
                 return entidades;
             }
             catch (Exception ex)

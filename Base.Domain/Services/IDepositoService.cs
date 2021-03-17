@@ -8,7 +8,7 @@ namespace Base.Domain.Services
 {
     public interface IDepositoService
     {
-       public Task<IEnumerable<Deposito>> GetAll();
+       public Task<IEnumerable<Deposito>> GetAll(int idCliente);
        public Task<Deposito> GetById(int id);
     }
 }

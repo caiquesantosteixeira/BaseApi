@@ -8,7 +8,7 @@ namespace Base.Domain.Repositorios
 {
     public interface ISaque
     {
-        Task<IEnumerable<Saque>> GetAll();
+        Task<IEnumerable<Saque>> GetAll(int idCLiente);
 
         Task<Saque> GetById(int id);
         Task<Saque> Cadastrar(Saque saque);

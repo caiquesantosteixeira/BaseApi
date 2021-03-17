@@ -55,11 +55,11 @@ namespace Base.Infra.Repositorios
             }
         }
 
-        public async Task<IEnumerable<Base.Domain.Entidades.Deposito>> GetAll()
+        public async Task<IEnumerable<Base.Domain.Entidades.Deposito>> GetAll(int idCliente)
         {
             try
             {
-                return await _ctx.Deposito.AsNoTracking().ToListAsync();
+                return await _ctx.Deposito.Where(a => a.IdCliente == idCliente).ToListAsync();
             }
             catch (Exception ex)
             {

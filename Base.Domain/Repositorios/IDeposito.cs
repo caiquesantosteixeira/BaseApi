@@ -8,7 +8,7 @@ namespace Base.Domain.Repositorios
 {
     public interface IDeposito
     {
-        Task<IEnumerable<Deposito>> GetAll();
+        Task<IEnumerable<Deposito>> GetAll(int idCLiente);
 
         Task<Deposito> GetById(int id);
         Task<Deposito> Cadastrar(Deposito cliente);

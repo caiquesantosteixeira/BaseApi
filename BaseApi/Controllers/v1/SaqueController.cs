@@ -18,11 +18,11 @@ namespace Base.API.Controllers.v1
     public class SaqueController : ControllerBase
     {
         [HttpGet()]
-        public async Task<IActionResult> GetAll([FromServices] ISaquesService service)
+        public async Task<IActionResult> GetAll(int idCLiente,[FromServices] ISaquesService service)
         {
             try
             {
-                var dados = await service.GetAll();
+                var dados = await service.GetAll(idCLiente);
                 return Ok(new Retorno(true, "Dados GetAll", dados));
             }
             catch (Exception ex)

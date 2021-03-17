@@ -53,6 +53,7 @@ namespace Base.Domain.Handler
             cliente.Saldo = command.Saldo;
             cliente.Cpf = command.Cpf;
             cliente.Senha = command.Senha;
+            cliente.IdUsuario = command.IdUsuario;
             try
             {
                 var ret = await _repository.Cadastrar(cliente);
