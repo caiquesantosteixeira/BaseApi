@@ -60,11 +60,24 @@ namespace Base.Infra.Repositorios
         {
             try
             {
-                return await _ctx.Transferencia.Where(a => a.IdClienteDestinatario == idCliente).ToListAsync();
+                return await _ctx.Transferencia.Where(a => a.IdClienteRemetente == idCliente).ToListAsync();
             }
             catch (Exception ex)
             {
                // _log.GerarLogDisc("Erro", ex: ex);
+                throw new Exception("Erro ao transferencia status", ex);
+            }
+        }
+
+        public async Task<IEnumerable<Base.Domain.Entidades.Transferencia>> GetAllRecebidas(int idCliente)
+        {
+            try
+            {
+                return await _ctx.Transferencia.Where(a => a.IdClienteDestinatario == idCliente).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                // _log.GerarLogDisc("Erro", ex: ex);
                 throw new Exception("Erro ao transferencia status", ex);
             }
         }

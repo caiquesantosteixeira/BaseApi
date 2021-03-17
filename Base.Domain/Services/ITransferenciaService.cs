@@ -9,6 +9,8 @@ namespace Base.Domain.Services
     public interface ITransferenciaService
     {
        public Task<IEnumerable<Transferencia>> GetAll(int idCLiente);
-       public Task<Transferencia> GetById(int id);
+
+        public Task<IEnumerable<Transferencia>> GetAllRecebidas(int idCLiente);
+        public Task<Transferencia> GetById(int id);
     }
 }

@@ -37,6 +37,20 @@ namespace Base.Infra.Services.Cliente
             }
         }
 
+        public async Task<IEnumerable<Base.Domain.Entidades.Transferencia>> GetAllRecebidas(int idCliente)
+        {
+            try
+            {
+                var entidades = await _traRepo.GetAllRecebidas(idCliente);
+                return entidades;
+            }
+            catch (Exception ex)
+            {
+                //_log.GerarLogDisc("Erro", ex: ex);
+                throw new Exception("Erro transferenciaService", ex);
+            }
+        }
+
         public async Task<Base.Domain.Entidades.Transferencia> GetById(int id)
         {
             try

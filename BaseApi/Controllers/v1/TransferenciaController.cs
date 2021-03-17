@@ -32,6 +32,21 @@ namespace Base.API.Controllers.v1
             }
         }
 
+        [HttpGet()]
+        [Route("GetAllRecebidas")]
+        public async Task<IActionResult> GetAllRecebidas(int idClienteRecebidas, [FromServices] ITransferenciaService service)
+        {
+            try
+            {
+                var dados = await service.GetAllRecebidas(idClienteRecebidas);
+                return Ok(new Retorno(true, "Dados GetAll", dados));
+            }
+            catch (Exception ex)
+            {
+                //GerarLog("Erro ao listar GetById", ex: ex);
+                return StatusCode(500, ex.ToString());
+            }
+        }
 
 
         [HttpGet("{id:int}")]

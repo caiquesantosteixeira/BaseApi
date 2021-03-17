@@ -9,6 +9,8 @@ namespace Base.Domain.Repositorios
     public interface ITransferencia
     {
         Task<IEnumerable<Transferencia>> GetAll(int idCliente);
+
+        Task<IEnumerable<Transferencia>> GetAllRecebidas(int idCliente);
         Task<Transferencia> GetById(int id);
         Task<Transferencia> Cadastrar(Transferencia cliente);
         Task<Transferencia> Atualizar(Transferencia cliente);

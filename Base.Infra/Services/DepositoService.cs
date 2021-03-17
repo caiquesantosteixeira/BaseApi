@@ -1,4 +1,5 @@
 ﻿using Base.Domain.DTOs.Cliente;
+using Base.Domain.Entidades;
 using Base.Domain.Repositorios;
 //using Base.Domain.Repositorios.Logging;
 using Base.Domain.Services;
@@ -14,6 +15,11 @@ namespace Base.Infra.Services.Cliente
     public sealed class DepositoService : IDepositoService
     {
         private readonly IDeposito _depRepo;
+
+        public DepositoService()
+        {
+        }
+
         //private readonly ILog _log;        
         public DepositoService(IDeposito clienteRepository)
         {
@@ -23,7 +29,7 @@ namespace Base.Infra.Services.Cliente
 
 
 
-        public async Task<IEnumerable<Base.Domain.Entidades.Deposito>> GetAll(int idCliente)
+        public async Task<IEnumerable<Deposito>> GetAll(int idCliente)
         {
             try
             {
@@ -37,7 +43,7 @@ namespace Base.Infra.Services.Cliente
             }
         }
 
-        public async Task<Base.Domain.Entidades.Deposito> GetById(int id)
+        public async Task<Deposito> GetById(int id)
         {
             try
             {
@@ -55,7 +61,7 @@ namespace Base.Infra.Services.Cliente
 
 
         // Métodos públicos de processamento do retorno desse servico
-        private IEnumerable<Base.Domain.Entidades.Deposito> ProcessarRetorno(IEnumerable<Base.Domain.Entidades.Deposito> entidades)
+        private IEnumerable<Deposito> ProcessarRetorno(IEnumerable<Base.Domain.Entidades.Deposito> entidades)
         {
             if (entidades.Count() <= 0)
                 return null;
@@ -63,7 +69,7 @@ namespace Base.Infra.Services.Cliente
             return entidades;
         }
 
-        private Base.Domain.Entidades.Deposito ProcessarRetorno(Base.Domain.Entidades.Deposito entidade)
+        private Deposito ProcessarRetorno(Deposito entidade)
         {
             if (entidade == null)
                 return null;
