@@ -18,11 +18,11 @@ namespace Base.API.Controllers.v1
     public class TransferenciaController : ControllerBase
     {
         [HttpGet()]
-        public async Task<IActionResult> GetAll([FromServices] ITransferenciaService service)
+        public async Task<IActionResult> GetAll(int idCliente, [FromServices] ITransferenciaService service)
         {
             try
             {
-                var dados = await service.GetAll();
+                var dados = await service.GetAll(idCliente);
                 return Ok(new Retorno(true, "Dados GetAll", dados));
             }
             catch (Exception ex)

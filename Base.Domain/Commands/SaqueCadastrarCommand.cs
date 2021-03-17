@@ -13,12 +13,11 @@ namespace Base.Domain.Commands.Cliente
         public decimal Valor { get; set; }
         public void Validate()
         {
-           // AddNotifications(
-           //  new Contract()
-           //    .Requires()
-           //    .IsGreaterThan(IdCliente, 0, "IdEmpresa", "Id Empresa Inválido")
-           //    .HasMinLen(IdUsuario, 20, "IdUsuario", "Id do Usuario inválido.")
-           //);
+            AddNotifications(
+              new Contract()
+                .Requires()
+                .IsGreaterThan(Valor, 0, "Valor", "Valor precisa ser maior que 0")
+            );
         }
     }
 }

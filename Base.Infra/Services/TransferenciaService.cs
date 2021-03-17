@@ -23,11 +23,11 @@ namespace Base.Infra.Services.Cliente
 
 
 
-        public async Task<IEnumerable<Base.Domain.Entidades.Transferencia>> GetAll()
+        public async Task<IEnumerable<Base.Domain.Entidades.Transferencia>> GetAll(int idCliente)
         {
             try
             {
-                var entidades = await _traRepo.GetAll();
+                var entidades = await _traRepo.GetAll(idCliente);
                 return entidades;
             }
             catch (Exception ex)

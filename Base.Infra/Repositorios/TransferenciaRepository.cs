@@ -56,11 +56,11 @@ namespace Base.Infra.Repositorios
             }
         }
 
-        public async Task<IEnumerable<Base.Domain.Entidades.Transferencia>> GetAll()
+        public async Task<IEnumerable<Base.Domain.Entidades.Transferencia>> GetAll(int idCliente)
         {
             try
             {
-                return await _ctx.Transferencia.AsNoTracking().ToListAsync();
+                return await _ctx.Transferencia.Where(a => a.IdClienteDestinatario == idCliente).ToListAsync();
             }
             catch (Exception ex)
             {
